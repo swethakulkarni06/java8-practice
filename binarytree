@@ -1,0 +1,91 @@
+
+//Tree Node class
+class TreeNode {
+	int data;
+	TreeNode left;
+	TreeNode right;
+	TreeNode(int data) {
+		this.data=data;
+		this.left=null;
+		this.right=null;
+	}
+}
+
+public class BinaryTree {
+	TreeNode root;
+	
+  //Recursive method to create tree
+	public void createTree(TreeNode node, int data) {
+		TreeNode newTreeNode = new TreeNode(data);
+		
+		if(root == null) {
+			root = newTreeNode;
+			return;
+		}
+		
+		if(node != null) {
+			if(node.data > data) {
+				if(node.left != null) {
+					createTree(node.left, data);
+				} else {
+					node.left = newTreeNode;
+				}
+			} else if(node.data < data) {
+				if(node.right != null) {
+					createTree(node.right, data);
+				} else {
+					node.right = newTreeNode;
+				}
+			}
+		}
+	}
+
+ //Recursive In-Order tree traversal (Left ,Data, Right)
+	public void inOrderTraversal(TreeNode node) {
+		if(node != null) {
+			inOrderTraversal(node.left);
+			System.out.println(node.data);
+			inOrderTraversal(node.right);
+		}
+	}
+	
+  //Recursive Pre-order tree traversal (data, left, right)
+	public void preOrderTraversal(TreeNode node) {
+		if(node != null) {
+			System.out.println(node.data);
+			preOrderTraversal(node.left);
+			preOrderTraversal(node.right);
+		}
+	}
+	
+  //Recursive Post-Order tree traversal (Left, Right,data) 
+	public void postOrderTraversal(TreeNode node) {
+		if(node != null) {
+			postOrderTraversal(node.left);
+			postOrderTraversal(node.right);
+			System.out.println(node.data);
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		BinaryTree bt = new BinaryTree();
+		
+		bt.createTree(bt.root, 6);
+		bt.createTree(bt.root, 3);
+		bt.createTree(bt.root, 5);
+		bt.createTree(bt.root, 9);
+		bt.createTree(bt.root, 4);
+		bt.createTree(bt.root, 10);
+		
+		System.out.println("In Order Tree traversal :");
+		bt.inOrderTraversal(bt.root);
+		
+		System.out.println("Pre Order Tree traversal :");
+		bt.preOrderTraversal(bt.root);
+		
+		System.out.println("Post Order Tree traversal :");
+		bt.postOrderTraversal(bt.root);
+
+	}
+}
